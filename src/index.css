@@ -3,3 +3,10 @@
 .container {
   margin: 2rem;
 }
+
+.articlesList {
+  li {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -4,6 +4,7 @@ import myArticles from '../data/articles'
 export default function Main() {
     const [articles, setArticles] = useState(myArticles)
     const [newArticle, setNewArticle] = useState('')
+
     function handleAddArticle(e) {
         e.preventDefault()
         if (newArticle === '') {
@@ -17,15 +18,18 @@ export default function Main() {
         setNewArticle('')
     }
 
-    function handleDeleteLast() {
-        setArticles(articles.slice(0, -1))
+    function handleDeleteArticle(index) {
+        setArticles(articles.filter((_, i) => i !== index))
     }
     return (
         <div className="container">
             <ul className='articlesList list-group'>
 
                 {articles.map((article, index) => (
-                    <li className='list-group-item' key={index}>{article}</li>
+                    <li className='list-group-item' key={index}>{article}
+                        <button type='button' className='btn btn-danger mx-4' onClick={() => handleDeleteArticle(index)}>Delete</button>
+                    </li>
+
                 ))}
             </ul>
             <form onSubmit={handleAddArticle}>
@@ -45,7 +49,6 @@ export default function Main() {
                 </div>
                 <button type='submit' className='btn btn-primary'>Submit</button>
             </form>
-            <button type='button' className='btn btn-danger mt-3' onClick={handleDeleteLast}>Delete</button>
         </div>
 
     )
